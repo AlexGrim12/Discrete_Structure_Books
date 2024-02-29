@@ -3,20 +3,24 @@ import '../models/libro.dart';
 import '../screens/detalle_libro.dart';
 
 class FavoritosPage extends StatefulWidget {
+  final List<Libro> libros; // Lista de todos los libros
+
+  FavoritosPage({required this.libros});
+
   @override
   _FavoritosPageState createState() => _FavoritosPageState();
 }
 
 class _FavoritosPageState extends State<FavoritosPage> {
-  List<Libro> favoritos = [];
-
   @override
   Widget build(BuildContext context) {
+    List<Libro> favoritos = widget.libros.where((libro) => libro.esFavorito).toList();
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Favoritos'),
       ),
-      body: _buildListaFavoritos(),
+      body: _buildListaFavoritos(favoritos),
       bottomNavigationBar: BottomAppBar(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -26,12 +30,16 @@ class _FavoritosPageState extends State<FavoritosPage> {
               onPressed: () {
                 Navigator.pop(context); // Regresa a la página principal
               },
+              color: Colors.grey[400],
+              hoverColor: Colors.orange[100],
             ),
             IconButton(
               icon: Icon(Icons.favorite),
               onPressed: () {
                 // Lógica para navegar a la página de inicio
               },
+              color: Colors.red,
+              hoverColor: Colors.red[100],
             ),
           ],
         ),
@@ -39,7 +47,7 @@ class _FavoritosPageState extends State<FavoritosPage> {
     );
   }
 
-  Widget _buildListaFavoritos() {
+  Widget _buildListaFavoritos(List<Libro> favoritos) {
     if (favoritos.isEmpty) {
       return Center(
         child: Text('No hay libros favoritos.'),
