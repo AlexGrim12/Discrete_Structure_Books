@@ -6,6 +6,7 @@ class AgregarLibroScreen extends StatelessWidget {
   final TextEditingController autorController = TextEditingController();
   final TextEditingController portadaController = TextEditingController();
   final TextEditingController descripcionController = TextEditingController();
+  final TextEditingController ubicacionController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +34,10 @@ class AgregarLibroScreen extends StatelessWidget {
             TextField(
               controller: descripcionController,
               decoration: InputDecoration(labelText: 'Descripción'),
+            ),
+            TextField(
+              controller: ubicacionController,
+              decoration: InputDecoration(labelText: 'Ubicación'),
             ),
             SizedBox(height: 16),
             ElevatedButton(

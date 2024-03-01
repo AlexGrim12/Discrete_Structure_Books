@@ -24,6 +24,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Catálogo de Libros 📙',
       theme: _currentTheme.copyWith(
+        // Habilitar Material You (Material 3
         colorScheme: _currentTheme == ThemeData.light()
             ? const ColorScheme.light(
                 primary: Colors.orange,
@@ -38,17 +39,23 @@ class _MyAppState extends State<MyApp> {
           headline1: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
-            color: _currentTheme == ThemeData.light() ? Colors.black : Colors.white,
+            color: _currentTheme == ThemeData.light()
+                ? Colors.black
+                : Colors.white,
           ),
           subtitle1: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w500,
-            color: _currentTheme == ThemeData.light() ? Colors.black : Colors.white,
+            color: _currentTheme == ThemeData.light()
+                ? Colors.black
+                : Colors.white,
           ),
           bodyText1: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.normal,
-            color: _currentTheme == ThemeData.light() ? Colors.black : Colors.white,
+            color: _currentTheme == ThemeData.light()
+                ? Colors.black
+                : Colors.white,
           ),
         ),
       ),
@@ -120,7 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
               'https://m.media-amazon.com/images/I/51j7s-ICwCL._AC_UF1000,1000_QL80_.jpg',
           descripcion:
               'Algorithms: Sequential, Parallel, and Distributed offers in-depth coverage of traditional and current topics in sequential algorithms, as well as a solid introduction to the theory of parallel and distributed algorithms. In light of the emergence of modern computing environments such as parallel computers, the Internet, and cluster and grid computing, it is important that computer science students be exposed to algorithms that exploit these technologies. Berman and Pauls text will teach students how to create new algorithms or modify existing algorithms, thereby enhancing students ability to think independently.',
-          ubicacion: "Biliblioteca ",
+          ubicacion: "Biblioteca Antonio Dovalí Jaime",
           esFavorito: false,
         ),
         Libro(
@@ -129,7 +136,7 @@ class _MyHomePageState extends State<MyHomePage> {
           portada: 'https://pictures.abebooks.com/isbn/9780072899054-es.jpg',
           descripcion:
               'Contiene gran número de ejercicios y ejemplos aclaratorios. Cada tema incluye demostraciones matemáticas, análisis combinatorio, estructuras discretas, algoritmos, engarzando estos conceptos con herramientas para resolver problemas a través de modelos. Especial importancia a la Lógica, tipos de prueba y pruebas de escritura.',
-          ubicacion: "Biliblioteca ",
+          ubicacion: "Biblioteca Antonio Dovalí Jaime",
           esFavorito: false,
         ),
         Libro(
@@ -139,7 +146,7 @@ class _MyHomePageState extends State<MyHomePage> {
               'https://m.media-amazon.com/images/I/51H0Fc9ivSL._SY342_.jpg',
           descripcion:
               'Written specifically for computer science students, this unique textbook directly addresses their needs by providing a foundation in discrete math while using motivating, relevant CS applications. This text takes an active-learning approach where activities are presented as exercises and the material is then fleshed out through explanations and extensions of the exercises.',
-          ubicacion: "Biliblioteca ",
+          ubicacion: "Biblioteca Antonio Dovalí Jaime",
           esFavorito: false,
         ),
         Libro(
@@ -149,9 +156,247 @@ class _MyHomePageState extends State<MyHomePage> {
               'https://images.bwbcovers.com/013/Discrete-Mathematics-Ross-Kenneth-A-9780132181570.jpg',
           descripcion:
               'Revised for extra clarity, the distinguishing characteristic of Ross and Wright is a sound mathematical treatment that increases smoothly in sophistication. The text presents utility-grade discrete math tools so students can understand them, use them, and move on to more advanced mathematical topics.',
-          ubicacion: "Biliblioteca ",
+          ubicacion: "Biblioteca Antonio Dovalí Jaime",
           esFavorito: false,
         ),
+
+        Libro(
+          titulo: 'Discrete mathematical structures',
+          autor: 'Bernard Kolman, Robert C. Busby, Sharon Ross',
+          portada:
+              'https://images-na.ssl-images-amazon.com/images/P/9688807990.01.LZZZZZZZ.jpg',
+          descripcion:
+              'ofrece una presentación clara y concisa de los conceptos fundamentales de las matemáticas discretas. Ideal para un curso introductorio de un semestre, este texto contiene más aplicaciones genuinas de informática que cualquier otro texto en este campo. Este libro está escrito en un nivel apropiado para una amplia variedad de especialidades y no especialidades, y asume un curso universitario de álgebra como requisito previo.',
+          ubicacion:
+              "8 en  Facultad de Ingeniería 7 en  Fac. Ing. Div. Est. Prof. Anexo Clasificacion: QA76.9 K64 2018",
+          esFavorito: false,
+        ),
+
+        Libro(
+          titulo: 'Matemáticas discretas con teoría de gráficas y combinatoria',
+          autor: 'T. Veerarajan ; traducción, Gabriel Nagore C.',
+          portada:
+              'https://www.elsotano.com/imagenes_grandes/9789701/978970106530.JPG',
+          descripcion:
+              'En esta obra, T. Veerarajan introduce algunos conceptos fundamentales de las matemáticas discretas, de una manera precisa y fácil. El libro contiene una mezcla inteligente de conceptos, ejemplos resueltos y ejercicios con respuestas que lo hace ideal para los cursos de licenciatura de matemáticas discretas. Esta combinación de elementos logra que el estudiante relacione en forma adecuada las técnicas matemáticas con las aplicaciones de cómputo. Características sobresalientes o Cobertura exhaustiva de la teoría de conjuntos. o Teoría de gráficas y combinatoria abordadas',
+          ubicacion:
+              "8 en  Facultad de Ingeniería 2 en  Fac. Ing. Div. Est. Prof. Anexo Clasificacion: QA248 V4418",
+          esFavorito: false,
+        ),
+
+        Libro(
+          titulo: 'Introductory discrete mathematics',
+          autor: 'V.K. Balakrishnan',
+          portada: 'https://m.media-amazon.com/images/I/61C-frrq2-L.SL1000.jpg',
+          descripcion:
+              'This concise text offers an introduction to discrete mathematics for undergraduate students in computer science and mathematics. Mathematics educators consider it vital that their students be exposed to a course in discrete methods that introduces them to combinatorial mathematics and to algebraic and logical structures focusing on the interplay between computer science and mathematics. The present volume emphasizes combinatorics, graph theory with applications to some stand network optimization problems, and algorithms to solve these problems.',
+          ubicacion:
+              "3 en  Facultad de Ingeniería 1 en  Fac. Ing. Div. Est. Prof. Anex Clasificacion: QA39.2 B356 1996",
+          esFavorito: false,
+        ),
+
+Libro(
+          titulo: 'Discrete mathematics',
+          autor: 'Richard Johnsonbaugh',
+          portada:
+              'https://m.media-amazon.com/images/I/91Sb82idcVL.SL1500.jpg',
+          descripcion:
+              'With nearly 4,500 exercises, Discrete Mathematics provides ample opportunities for students to practice, apply, and demonstrate conceptual understanding. Exercise sets features a large number of applications, especially applications to computer science. The almost 650 worked examples provide ready reference for students as they work. A strong emphasis on the interplay among the various topics serves to reinforce understanding.',
+          ubicacion:
+              "2 en  Facultad de Ingeniería Div. Est. Prof. Anex Clasificacion: QA39.2 J64 2005",
+          esFavorito: false,
+        ),
+
+Libro(
+          titulo: 'Matematicas discretas : con aplicacion a las ciencias de la computacion',
+          autor: 'Jean-Paul Tremblay, Ram Manohar ; tr. Raymundo Hugo Rangel Gutierrez ',
+          portada:
+              '',
+          descripcion:
+              'Contiene lógica, teoría de conjuntos, estructuras algebraicas, álgebra booleana, teorpia de gráficos y teoría de computabilidad básica.',
+          ubicacion:
+              "23 en  Facultad de Ingeniería Div. Est. Prof. Anex Clasificacion: QA39.2 T44 1996",
+          esFavorito: false,
+        ),
+//         Titulo:
+// Matemáticas discretas con teoría de gráficas y combinatoria
+// Autores:
+// T. Veerarajan ; traducción, Gabriel Nagore C. 
+// Descripcion:
+
+// URL IMAGEN:
+// https://books.google.com/books/content?id=cU6VPgAACAAJ&printsec=frontcover&img=1&zoom=5
+
+// 8 en  Facultad de Ingeniería 
+// 2 en  Fac. Ing. Div. Est. Prof. Anex 
+
+
+// Clasificacion:
+// QA248 V4418
+Libro(
+          titulo: 'Matemáticas discretas con aplicaciones',
+          autor: 'Susanna S. Epp ; traducción, Gabriel Nagore C.',
+          portada:
+              'https://books.google.com/books/content?id=cU6VPgAACAAJ&printsec=frontcover&img=1&zoom=5',
+          descripcion:
+              'Este libro es una introducción accesible a las ideas matemáticas básicas de la matemática discreta y la teoría de grafos, que se presenta en un marco que muestra la relevancia de las ideas y cómo se aplican a problemas del mundo real. Los estudiantes aprenden sobre las estructuras matemáticas que se utilizan para modelar problemas del mundo real y sobre las herramientas necesarias para resolver esos problemas.',
+          ubicacion:
+              "8 en  Facultad de Ingeniería 7 en  Fac. Ing. Div. Est. Prof. Anex Clasificacion: QA248 V4418",
+          esFavorito: false,
+        ),
+//         Titulo:
+// Matematica discreta
+// Autores:
+// Francesc Comellas
+// Descripcion:
+// La matemática discreta es la parte de las matemáticas que trata de estructuras finitas y numerables. Esta nueva rama de la ciencia matemática ha recibido un impulso decisivo gracias a los recientes progresos de la informática y las técnicas de computación
+
+// URL IMAGEN:
+// https://m.media-amazon.com/images/I/51S2qH7OqqL.jpg
+
+
+// 5 en  Fac. Ing. Div. Est. Prof. Anex 
+
+// Clasificacion:
+// QA37.3 M3718 2002
+Libro(
+          titulo: 'Matemática discreta',
+          autor: 'Francesc Comellas',
+          portada:
+              'https://m.media-amazon.com/images/I/51S2qH7OqqL.jpg',
+          descripcion:
+              'La matemática discreta es la parte de las matemáticas que trata de estructuras finitas y numerables. Esta nueva rama de la ciencia matemática ha recibido un impulso decisivo gracias a los recientes progresos de la informática y las técnicas de computación',
+          ubicacion:
+              "5 en  Fac. Ing. Div. Est. Prof. Anex Clasificacion: QA37.3 M3718 2002",
+          esFavorito: false,
+        ),
+//         Titulo:
+// Matemáticas discretas
+// Autores:
+// Edward R. Scheinerman
+// Descripcion:
+
+
+// URL IMAGEN:
+// https://sabio.eia.edu.co/cgi-bin/koha/opac-image.pl?thumbnail=1&imagenumber=5068
+
+
+// 1 en  Fac. de Ingeniería. Posgrado 
+// 6 en  Fac. Ing. Div. Est. Prof. Anex 
+
+// Clasificacion:
+// QA37.2 S3518
+Libro(
+          titulo: 'Matemáticas discretas',
+          autor: 'Edward R. Scheinerman',
+          portada:
+              'https://sabio.eia.edu.co/cgi-bin/koha/opac-image.pl?thumbnail=1&imagenumber=5068',
+          descripcion:
+              '',
+          ubicacion:
+              "1 en  Fac. de Ingeniería. Posgrado 6 en  Fac. Ing. Div. Est. Prof. Anex Clasificacion: QA37.2 S3518",
+          esFavorito: false,
+        ),
+
+//         Titulo:
+// Matemáticas discretas
+// Autores:
+// Espinoza Armenta Ramón
+// Descripcion:
+// Este libro de texto está dirigido a estudiantes de ciencias básicas e ingeniería y en él se exponen los fundamentos de esta área de las matemáticas que es uno de los pilares de la ciencia de la computación. La obra consta de cuatro partes: Fundamentos, Métodos algebraicos, Enumeración combinatoria y Teoría de grafos. Para esta nueva edición se han agregado nuevas secciones, se ha ampliado el número de problemas propuestos al final de cada capítulo y se han incluido más aplicaciones relacionadas con la ciencia de la computación.
+
+// URL IMAGEN:
+// https://www.elsotano.com/imagenes/9786076/978607622752.JPG
+
+// Ubicacion:
+// 1 en  Fac. Ing. Div. Est. Prof. Anex 
+// Biblioteca “Mtro. Enrique Rivero Borrell”
+
+// Clasificacion:
+// QA39.3 E76 2017
+Libro(
+          titulo: 'Matemáticas discretas',
+          autor: 'Espinoza Armenta Ramón',
+          portada:
+              'https://www.elsotano.com/imagenes/9786076/978607622752.JPG',
+          descripcion:
+              'Este libro de texto está dirigido a estudiantes de ciencias básicas e ingeniería y en él se exponen los fundamentos de esta área de las matemáticas que es uno de los pilares de la ciencia de la computación. La obra consta de cuatro partes: Fundamentos, Métodos algebraicos, Enumeración combinatoria y Teoría de grafos. Para esta nueva edición se han agregado nuevas secciones, se ha ampliado el número de problemas propuestos al final de cada capítulo y se han incluido más aplicaciones relacionadas con la ciencia de la computación.',
+          ubicacion:
+              "1 en  Fac. Ing. Div. Est. Prof. Anex Biblioteca “Mtro. Enrique Rivero Borrell” Clasificacion: QA39.3 E76 2017",
+          esFavorito: false,
+        ),
+//         Titulo:
+// Matemáticas discretas
+// Autores:
+// Lipschutz, Seymour / Lipson, Marc
+// Descripcion:
+// Las matemáticas discretas, el estudio de los sistemas finitos, han adquirido cada vez más importancia en la medida en que ha avanzado la era de las computadoras. Básicamente, la computadora digital es una estructura finita, y muchas de sus propiedades pueden comprenderse e interpretarse en el marco de referencia de los sistemas matemáticos finitos.
+// Este libro, al presentar el material esencial, cumple los requisitos de un curso formal de matemáticas discretas, o como complemento de cualquier texto actual.Este libro, al presentar el material esencial, cumple los requisitos de un curso formal de matemáticas discretas o como complemento de cualquier texto actual. Matemáticas Discretas aborda temas sobre conjuntos, relaciones, funciones y algoritmos. También trata sobre gráficas, árboles binarios, lenguajes, conjuntos y álgebra booleana.
+
+// URL IMAGEN:
+// https://www.elsotano.com/imagenes/9789701/978970107236.JPG
+
+// Ubicacion:
+// 30 en  Fac. Ing. Div. Est. Prof. Anex 
+// Biblioteca “Mtro. Enrique Rivero Borrell”
+
+// Clasificacion:
+// QA162 L54918
+Libro(
+          titulo: 'Matemáticas discretas',
+          autor: 'Lipschutz, Seymour / Lipson, Marc',
+          portada:
+              'https://www.elsotano.com/imagenes/9789701/978970107236.JPG',
+          descripcion:
+              'Las matemáticas discretas, el estudio de los sistemas finitos, han adquirido cada vez más importancia en la medida en que ha avanzado la era de las computadoras. Básicamente, la computadora digital es una estructura finita, y muchas de sus propiedades pueden comprenderse e interpretarse en el marco de referencia de los sistemas matemáticos finitos. Este libro, al presentar el material esencial, cumple los requisitos de un curso formal de matemáticas discretas, o como complemento de cualquier texto actual.Este libro, al presentar el material esencial, cumple los requisitos de un curso formal de matemáticas discretas o como complemento de cualquier texto actual. Matemáticas Discretas aborda temas sobre conjuntos, relaciones, funciones y algoritmos. También trata sobre gráficas, árboles binarios, lenguajes, conjuntos y álgebra booleana.',
+          ubicacion:
+              "30 en  Fac. Ing. Div. Est. Prof. Anex Biblioteca “Mtro. Enrique Rivero Borrell” Clasificacion: QA162 L54918",
+          esFavorito: false,
+        ),
+//         Titulo:
+// Matemáticas discretas con aplicaciones
+// Autores:
+// Epp, Susanna S.
+// Descripcion:
+// Ofrece una introducción clara a la matemática discreta. Explica conceptos complejos y abstractos con claridad y precisión. Este libro presenta no sólo los temas principales de la matemática discreta, sino también el razonamiento que subyace el pensamiento matemático. Los estudiantes desarrollan la capacidad de pensar en forma abstracta del mismo modo en que ellos estudian las ideas de la lógica y la demostración. Mientras se aprende acerca de conceptos tales como circuitos lógicos y adición de equipo, análisis de algoritmos, pensamiento recursivo, computabilidad, autómatas, criptografía y combinatoria, los estudiantes descubren que las ideas de la matemática discreta subyacen y son esenciales para la ciencia y la tecnología de la era de las computadoras.
+
+// URL IMAGEN:
+// https://www.elsotano.com/imagenes/9786074/978607481621.JPG
+
+// Ubicacion:
+// 3 en  Fac. Ing. Div. Est. Prof. Anex 
+// Biblioteca “Mtro. Enrique Rivero Borrell”
+
+// Clasificacion:
+// QA39.2 E6618
+Libro(
+          titulo: 'Matemáticas discretas con aplicaciones',
+          autor: 'Epp, Susanna S.',
+          portada:
+              'https://www.elsotano.com/imagenes/9786074/978607481621.JPG',
+          descripcion:
+              'Ofrece una introducción clara a la matemática discreta. Explica conceptos complejos y abstractos con claridad y precisión. Este libro presenta no sólo los temas principales de la matemática discreta, sino también el razonamiento que subyace el pensamiento matemático. Los estudiantes desarrollan la capacidad de pensar en forma abstracta del mismo modo en que ellos estudian las ideas de la lógica y la demostración. Mientras se aprende acerca de conceptos tales como circuitos lógicos y adición de equipo, análisis de algoritmos, pensamiento recursivo, computabilidad, autómatas, criptografía y combinatoria, los estudiantes descubren que las ideas de la matemática discreta subyacen y son esenciales para la ciencia y la tecnología de la era de las computadoras.',
+          ubicacion:
+              "3 en  Fac. Ing. Div. Est. Prof. Anex Biblioteca “Mtro. Enrique Rivero Borrell” Clasificacion: QA39.2 E6618",
+          esFavorito: false,
+        ),
+//         Titulo:
+// Matemáticas discretas con aplicaciones
+// Autores:
+// Epp, Susanna S.
+// Descripcion:
+// Ofrece una introducción clara a la matemática discreta. Explica conceptos complejos y abstractos con claridad y precisión. Este libro presenta no sólo los temas principales de la matemática discreta, sino también el razonamiento que subyace el pensamiento matemático. Los estudiantes desarrollan la capacidad de pensar en forma abstracta del mismo modo en que ellos estudian las ideas de la lógica y la demostración. Mientras se aprende acerca de conceptos tales como circuitos lógicos y adición de equipo, análisis de algoritmos, pensamiento recursivo, computabilidad, autómatas, criptografía y combinatoria, los estudiantes descubren que las ideas de la matemática discreta subyacen y son esenciales para la ciencia y la tecnología de la era de las computadoras.
+
+// URL IMAGEN:
+// https://www.elsotano.com/imagenes/9786074/978607481621.JPG
+
+// Ubicacion:
+// 3 en  Fac. Ing. Div. Est. Prof. Anex 
+// Biblioteca “Mtro. Enrique Rivero Borrell”
+
+// Clasificacion:
+// QA39.2 E6618
+
         // Puedes agregar más libros aquí si lo deseas
       ];
       _guardarLibros(); // Guardar los libros predeterminados
@@ -184,17 +429,14 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: TextField(
+            child: SearchBar(
               controller: searchController,
-              decoration: InputDecoration(
-                labelText: 'Buscar libros',
-                prefixIcon: Icon(Icons.search),
-                border: OutlineInputBorder(),
-              ),
               onChanged: (value) {
                 _filtrarLibros(
                     value); // Llamar a la función de filtrado cuando cambie el texto
               },
+              leading: const Icon(Icons.search),
+              hintText: 'Buscar libros...',
             ),
           ),
           Expanded(
