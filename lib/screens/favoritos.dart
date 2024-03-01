@@ -130,13 +130,19 @@ class _FavoritosPageState extends State<FavoritosPage> {
                   children: [
                     ElevatedButton(
                       onPressed: () {},
-                      child: Text('Leer más'),
                       style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Colors.blue),
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.orange),
+                      ),
+                      child: const Text(
+                        'Leer más',
+                        style: TextStyle(color: Colors.white),
                       ),
                     ),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        _mostrarAlertaEliminarLibro(context, libro);
+                      },
                       icon: Icon(Icons.favorite),
                       color: Colors.red,
                     ),
@@ -147,6 +153,35 @@ class _FavoritosPageState extends State<FavoritosPage> {
           ),
         ],
       ),
+    );
+  }
+
+  void _mostrarAlertaEliminarLibro(BuildContext context, Libro libro) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Confirmar"),
+          content: Text("¿Estás seguro de que deseas eliminar este libro de favoritos?"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Cerrar el diálogo
+              },
+              child: Text("Cancelar"),
+            ),
+            TextButton(
+              onPressed: () {
+                setState(() {
+                  libro.esFavorito = false;
+                });
+                Navigator.of(context).pop();
+              },
+              child: Text("Eliminar"),
+            ),
+          ],
+        );
+      },
     );
   }
 }

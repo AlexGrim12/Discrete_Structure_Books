@@ -1,40 +1,82 @@
-import 'package:discrete_structure_books/screens/favoritos.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
+
 import 'models/libro.dart';
 import 'screens/detalle_libro.dart';
 import 'screens/agregar_libro.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:convert';
+import 'screens/favoritos.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  ThemeData _currentTheme = ThemeData.light();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Catálogo de Libros 📙',
-      theme: ThemeData(
-        primaryColor: Colors.orange,
-        hintColor: Colors.blue,
-        scaffoldBackgroundColor: Colors.yellow[10],
-        textTheme: const TextTheme(
-          displayLarge: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          titleMedium: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-          bodyLarge: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+      theme: _currentTheme.copyWith(
+        colorScheme: _currentTheme == ThemeData.light()
+            ? const ColorScheme.light(
+                primary: Colors.orange,
+                secondary: Colors.orange,
+              )
+            : const ColorScheme.dark(
+                primary: Colors.orange,
+                secondary: Colors.orange,
+              ),
+        textTheme: TextTheme(
+          // Ajustar los colores de texto para el modo claro y oscuro
+          headline1: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: _currentTheme == ThemeData.light() ? Colors.black : Colors.white,
+          ),
+          subtitle1: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
+            color: _currentTheme == ThemeData.light() ? Colors.black : Colors.white,
+          ),
+          bodyText1: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.normal,
+            color: _currentTheme == ThemeData.light() ? Colors.black : Colors.white,
+          ),
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: MyHomePage(title: 'Libros para Estructuras Discretas'),
+      home: MyHomePage(
+        title: 'Libros para Estructuras Discretas',
+        toggleTheme:
+            _toggleTheme, // Pasar la función de cambio de tema a MyHomePage
+      ),
     );
+  }
+
+  void _toggleTheme() {
+    setState(() {
+      // Cambiar el tema según el tema actual
+      _currentTheme = _currentTheme == ThemeData.light()
+          ? ThemeData.dark()
+          : ThemeData.light();
+    });
   }
 }
 
 class MyHomePage extends StatefulWidget {
   final String title;
+  final VoidCallback toggleTheme; // Función para cambiar el tema
 
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  const MyHomePage({Key? key, required this.title, required this.toggleTheme})
+      : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -42,11 +84,21 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   List<Libro> libros = [];
+  late List<Libro> librosFiltrados; // Lista para almacenar libros filtrados
+  TextEditingController searchController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     _cargarLibros();
+    librosFiltrados =
+        libros; // Inicializar librosFiltrados con todos los libros al inicio
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose(); // Dispose del controlador de texto
+    super.dispose();
   }
 
   Future<void> _cargarLibros() async {
@@ -55,23 +107,49 @@ class _MyHomePageState extends State<MyHomePage> {
 
     if (librosJson != null) {
       setState(() {
-        libros.addAll(librosJson.map((json) => Libro.fromMap(jsonDecode(json))));
+        libros
+            .addAll(librosJson.map((json) => Libro.fromMap(jsonDecode(json))));
       });
     } else {
       // Si no hay libros guardados, agrega los libros predeterminados
       libros = [
         Libro(
-          titulo: 'Flutter para principiantes',
-          autor: 'John Doe',
-          portada: 'https://cdn.pixabay.com/photo/2015/11/19/21/10/glasses-1052010_1280.jpg',
-          descripcion: 'Aprende a crear aplicaciones móviles multiplataforma con Flutter.',
+          titulo: 'Algorithms: sequential, parallel, and distributed',
+          autor: 'Berman, Kenneth A.',
+          portada:
+              'https://m.media-amazon.com/images/I/51j7s-ICwCL._AC_UF1000,1000_QL80_.jpg',
+          descripcion:
+              'Algorithms: Sequential, Parallel, and Distributed offers in-depth coverage of traditional and current topics in sequential algorithms, as well as a solid introduction to the theory of parallel and distributed algorithms. In light of the emergence of modern computing environments such as parallel computers, the Internet, and cluster and grid computing, it is important that computer science students be exposed to algorithms that exploit these technologies. Berman and Pauls text will teach students how to create new algorithms or modify existing algorithms, thereby enhancing students ability to think independently.',
+          ubicacion: "Biliblioteca ",
           esFavorito: false,
         ),
         Libro(
-          titulo: 'El señor de los anillos',
-          autor: 'J.R.R. Tolkien',
-          portada: 'https://cdn.pixabay.com/photo/2015/11/19/21/10/glasses-1052010_1280.jpg',
-          descripcion: 'Una novela épica de fantasía sobre la lucha contra el Señor Oscuro Sauron.',
+          titulo: 'Matemáticas Discretas y sus Aplicaciones',
+          autor: 'Rosen, Kenneth H.',
+          portada: 'https://pictures.abebooks.com/isbn/9780072899054-es.jpg',
+          descripcion:
+              'Contiene gran número de ejercicios y ejemplos aclaratorios. Cada tema incluye demostraciones matemáticas, análisis combinatorio, estructuras discretas, algoritmos, engarzando estos conceptos con herramientas para resolver problemas a través de modelos. Especial importancia a la Lógica, tipos de prueba y pruebas de escritura.',
+          ubicacion: "Biliblioteca ",
+          esFavorito: false,
+        ),
+        Libro(
+          titulo: 'Discrete Mathematics for Computer Scientists',
+          autor: 'Stein, Clifford L.',
+          portada:
+              'https://m.media-amazon.com/images/I/51H0Fc9ivSL._SY342_.jpg',
+          descripcion:
+              'Written specifically for computer science students, this unique textbook directly addresses their needs by providing a foundation in discrete math while using motivating, relevant CS applications. This text takes an active-learning approach where activities are presented as exercises and the material is then fleshed out through explanations and extensions of the exercises.',
+          ubicacion: "Biliblioteca ",
+          esFavorito: false,
+        ),
+        Libro(
+          titulo: 'Discrete Mathematics',
+          autor: 'Keneeth A. Ross, Charles R. Wright',
+          portada:
+              'https://images.bwbcovers.com/013/Discrete-Mathematics-Ross-Kenneth-A-9780132181570.jpg',
+          descripcion:
+              'Revised for extra clarity, the distinguishing characteristic of Ross and Wright is a sound mathematical treatment that increases smoothly in sophistication. The text presents utility-grade discrete math tools so students can understand them, use them, and move on to more advanced mathematical topics.',
+          ubicacion: "Biliblioteca ",
           esFavorito: false,
         ),
         // Puedes agregar más libros aquí si lo deseas
@@ -82,7 +160,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<void> _guardarLibros() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final List<String> librosJson = libros.map((libro) => jsonEncode(libro.toMap())).toList();
+    final List<String> librosJson =
+        libros.map((libro) => jsonEncode(libro.toMap())).toList();
     await prefs.setStringList('libros', librosJson);
   }
 
@@ -94,46 +173,70 @@ class _MyHomePageState extends State<MyHomePage> {
         elevation: 0,
         actions: [
           IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {
-              // Lógica para la búsqueda
-            },
+            icon: Icon(
+                Icons.sunny), // Cambiar el icono dependiendo del tema actual
+            onPressed:
+                widget.toggleTheme, // Llamar a la función de cambio de tema
           ),
         ],
       ),
-      body: ListView.separated(
-        itemCount: libros.length + 1,
-        separatorBuilder: (BuildContext context, int index) => const Divider(),
-        itemBuilder: (BuildContext context, int index) {
-          if (index < libros.length) {
-            return InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DetalleLibroScreen(libro: libros[index]),
-                  ),
-                );
-              },
-              child: _buildLibroCard(libros[index]),
-            );
-          } else {
-            return Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  _agregarLibro(context);
-                },
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.orange),
-                ),
-                child: const Text(
-                  'Agregar Libro',
-                  style: TextStyle(color: Colors.white),
-                ),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              controller: searchController,
+              decoration: InputDecoration(
+                labelText: 'Buscar libros',
+                prefixIcon: Icon(Icons.search),
+                border: OutlineInputBorder(),
               ),
-            );
-          }
-        },
+              onChanged: (value) {
+                _filtrarLibros(
+                    value); // Llamar a la función de filtrado cuando cambie el texto
+              },
+            ),
+          ),
+          Expanded(
+            child: ListView.separated(
+              itemCount: librosFiltrados.length + 1,
+              separatorBuilder: (BuildContext context, int index) =>
+                  const Divider(),
+              itemBuilder: (BuildContext context, int index) {
+                if (index < librosFiltrados.length) {
+                  return InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              DetalleLibroScreen(libro: librosFiltrados[index]),
+                        ),
+                      );
+                    },
+                    child: _buildLibroCard(librosFiltrados[index]),
+                  );
+                } else {
+                  return Center(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        _agregarLibro(context);
+                      },
+                      style: ButtonStyle(
+                          // backgroundColor:
+                          //     MaterialStateProperty.all(Colors.orange),
+                          ),
+                      child: const Text(
+                        'Agregar Libro',
+                        // style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  );
+                }
+              },
+            ),
+          ),
+        ],
       ),
       bottomNavigationBar: BottomAppBar(
         child: Row(
@@ -166,6 +269,22 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  // Función para filtrar los libros basados en el término de búsqueda
+  void _filtrarLibros(String searchTerm) {
+    setState(() {
+      librosFiltrados = libros.where((libro) {
+        final titulo = libro.titulo.toLowerCase();
+        final autor = libro.autor.toLowerCase();
+        final descripcion = libro.descripcion.toLowerCase();
+        final searchLower = searchTerm.toLowerCase();
+        // Devuelve verdadero si alguno de los campos del libro contiene el término de búsqueda
+        return titulo.contains(searchLower) ||
+            autor.contains(searchLower) ||
+            descripcion.contains(searchLower);
+      }).toList();
+    });
+  }
+
   Widget _buildLibroCard(Libro libro) {
     return Card(
       elevation: 4,
@@ -182,7 +301,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             child: Image.network(
               libro.portada,
-              height: 200,
+              height: 450,
               width: double.infinity,
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) => Container(
@@ -225,7 +344,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     ElevatedButton(
                       onPressed: () {},
                       style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Colors.orange),
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.orange),
                       ),
                       child: const Text(
                         'Leer más',
@@ -249,7 +369,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         _guardarLibros();
                       },
                       icon: Icon(
-                        libro.esFavorito ? Icons.favorite : Icons.favorite_border,
+                        libro.esFavorito
+                            ? Icons.favorite
+                            : Icons.favorite_border,
                         color: libro.esFavorito ? Colors.red : Colors.grey,
                       ),
                     ),

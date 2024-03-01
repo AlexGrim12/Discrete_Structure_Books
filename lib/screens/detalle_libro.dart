@@ -12,42 +12,67 @@ class DetalleLibroScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(libro.titulo),
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Image.network(
-              libro.portada,
-              height: 200,
-              width: double.infinity,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) => Container(
-                height: 200,
-                color: Colors.grey[300],
-                child: Center(
-                  child: Icon(
-                    Icons.error,
-                    color: Colors.red,
+            Container(
+              margin: EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 3,
+                    blurRadius: 7,
+                    offset: Offset(0, 3),
                   ),
+                ],
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.network(
+                  libro.portada,
+                  fit: BoxFit.cover,
+                  height: 200,
                 ),
               ),
             ),
-            
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    'Título: ${libro.titulo}',
+                    style: Theme.of(context).textTheme.headline1,
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    'Autor: ${libro.autor}',
+                    style: Theme.of(context).textTheme.subtitle1,
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    'Descripción: ${libro.descripcion}',
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    'Ubicación: ${libro.ubicacion}',
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
+                ],
+              ),
+            ),
             SizedBox(height: 20),
-            Text(
-              'Título: ${libro.titulo}',
-              style: TextStyle(fontSize: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('Volver'),
             ),
-            SizedBox(height: 10),
-            Text(
-              'Autor: ${libro.autor}',
-              style: TextStyle(fontSize: 16),
-            ),
-            SizedBox(height: 10),
-            Text(
-              'Descripción: ${libro.descripcion}',
-              style: TextStyle(fontSize: 16),
-            ),
+            SizedBox(height: 20),
           ],
         ),
       ),
