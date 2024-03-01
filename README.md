@@ -1,6 +1,3 @@
-Aquí tienes un ejemplo de cómo podría ser el archivo `README.md` para esta aplicación:
-
----
 
 # Catálogo de Libros 📚
 
@@ -28,7 +25,3 @@ Esta es una aplicación de catálogo de libros desarrollada en Flutter que te pe
 ## Contribución
 
 Las contribuciones son bienvenidas. Si tienes alguna sugerencia, funcionalidad adicional que te gustaría agregar o encuentras algún error, no dudes en abrir un problema o enviar una solicitud de extracción.
-
-## Autor
-
-Este proyecto fue desarrollado por [Tu Nombre].
